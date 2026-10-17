@@ -15,8 +15,7 @@ const UserRegistration = () => {
     const [courseData, setCourseData] = useState([])
     const [semesterData, setSemesterData] = useState([])
     const [academicYearData, setAcademicYearData] = useState([])
-
-
+    
 
     const fetchDepartmentData = async () => {
         try {
@@ -86,7 +85,7 @@ const UserRegistration = () => {
 
             const photoUrl = await uploadPhoto(userId)
 
-            const { error: userError } = await supabase.from("tbl_user").insert([{
+            const { error: userError } = await supabase.from("tbl_user").insert({
                 id: userId,
                 name: name,
                 email: email,
@@ -97,7 +96,7 @@ const UserRegistration = () => {
                 course_id: courseId,
                 semester_id: semesterId,
                 academic_year_id: academicYearId
-            }])
+            })
 
 
             if (userError) {
@@ -106,7 +105,6 @@ const UserRegistration = () => {
             }
 
             alert("User Registered Successfully")
-            handleReset()
 
         } catch (error) {
             console.log(error);
@@ -156,15 +154,15 @@ const UserRegistration = () => {
             <table border={1} cellPadding={10} align='center'>
                 <tr>
                     <td>Name</td>
-                    <td><input type="text" onChange={(e) => setName(e.target.name)} /></td>
+                    <td><input type="text" onChange={(e) => setName(e.target.value)} /></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><input type="email" onChange={(e) => setEmail(e.target.name)} /></td>
+                    <td><input type="email" onChange={(e) => setEmail(e.target.value)} /></td>
                 </tr>
                 <tr>
                     <td>Contact</td>
-                    <td><input type="tel" onChange={(e) => setContact(e.target.name)} /></td>
+                    <td><input type="tel" onChange={(e) => setContact(e.target.value)} /></td>
                 </tr>
                 <tr>
                     <td>Department</td>
@@ -213,7 +211,7 @@ const UserRegistration = () => {
                 <tr>
                     <td>Address</td>
                     <td>
-                        <textarea name="" id="" onChange={(e) => setAddress(e.target.name)}></textarea>
+                        <textarea name="" id="" onChange={(e) => setAddress(e.target.value)}></textarea>
                     </td>
                 </tr>
                 <tr>
@@ -224,7 +222,7 @@ const UserRegistration = () => {
                 </tr>
                 <tr>
                     <td>Password</td>
-                    <td><input type="password" onChange={(e) => setPassword(e.target.name)} /></td>
+                    <td><input type="password" onChange={(e) => setPassword(e.target.value)} /></td>
                 </tr>
                 <tr>
                     <td colSpan={2} align='center'>
