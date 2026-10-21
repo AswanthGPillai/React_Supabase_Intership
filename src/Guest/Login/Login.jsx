@@ -15,10 +15,11 @@ const Login = () => {
         return
       }
       console.log(data);
-      const { data: profile } = await supabase.from('tbl_user').select('*').eq('id', data.user.id).single();
-      console.log(profile);
+      const { data: userData } = await supabase.from('tbl_user').select('*').eq('id', data.user.id).single();
+      console.log(userData);
       sessionStorage.setItem('uid', data.user.id);
       alert('Login successful');
+      alert(`Welcome ,${userData.name}`);
       navigate('/user/myprofile');
 
     } catch (error) {
